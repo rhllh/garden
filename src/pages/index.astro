@@ -1,17 +1,14 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro"
+const pageTitle = "rahillah's digital garden";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+	<p>hi there!</p>
+
+	<p>i'm rahillah, and this is my personal site and digital garden where i keep notes and references of all the things i'm interested in.</p>
+
+	<p>i'm building this mainly with <a href="https://astro.build">astro</a>. it's still a work in progress!</p>
+
+	<a href="/notes">all notes</a>
+</BaseLayout>

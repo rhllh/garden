@@ -1,0 +1,14 @@
+---
+const { url, title, class: className, pubDate } = Astro.props;
+
+const publishedDate = new Date(pubDate).toLocaleDateString('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+<div>
+    <p><a href={url} class={className}>{title}</a></p>
+    <p>{publishedDate}</p>
+</div>

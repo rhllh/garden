@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NotePost from '../components/NotePost.astro';
+
+const pageTitle = "all notes";
+const allNotes = await getCollection("notes");
+---
+<BaseLayout pageTitle={pageTitle}>
+
+    {
+        allNotes.map((note) => (
+            <NotePost class="post" url={`/notes/${note.id.replace(/\.md$/, '')}/`} 
+                    title={note.data.title} pubDate={note.data.pubDate} />
+        ))
+    }
+
+</BaseLayout>
+<style>
+    :global(.post) {
+        font-size: 2rem;
+    }
+</style>
