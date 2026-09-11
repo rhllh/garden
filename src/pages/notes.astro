@@ -1,16 +1,20 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from '../layouts/BaseLayout.astro';
-import NotePost from '../components/NotePost.astro';
+import NoteListItem from "../components/NoteListItem.astro";
 
 const pageTitle = "all notes";
-const allNotes = await getCollection("notes");
+const allNotes = (await getCollection("notes")).sort((a, b) => {
+  return b.data.pubDate.getTime() - a.data.pubDate.getTime();
+});
 ---
 <BaseLayout pageTitle={pageTitle}>
 
+    <!-- This is the landing page that lists all my notes in reverse chrono order only -->
+
     {
         allNotes.map((note) => (
-            <NotePost class="post" url={`/notes/${note.id.replace(/\.md$/, '')}/`} 
+            <NoteListItem class="post" url={`/notes/${note.id.replace(/\.md$/, '')}/`} 
                     title={note.data.title} pubDate={note.data.pubDate} />
         ))
     }

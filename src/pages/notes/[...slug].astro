@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import MarkdownLayout from '../../layouts/MarkdownLayout.astro';
 
 export async function getStaticPaths() {
+  // This function creates a static route per md file in /notes during build time
   const posts = await getCollection('notes');
   return posts.map(note => ({
     params: { slug: note.id.replace(/\\.md$/, '') }, props: { note },
