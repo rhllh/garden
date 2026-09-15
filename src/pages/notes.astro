@@ -14,7 +14,7 @@ const allNotes = (await getCollection("notes")).sort((a, b) => {
 
     {
         allNotes.map((note) => (
-            <NoteListItem class="post" url={`${import.meta.env.BASE_URL}notes/${note.id.replace(/\.md$/, '')}/`} 
+            <NoteListItem class="post" url={`${import.meta.env.BASE_URL}/notes/${note.id.replace(/\.md$/, '')}/`} 
                     title={note.data.title} pubDate={note.data.pubDate} />
         ))
     }
