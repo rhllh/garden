@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
-import MarkdownLayout from '../../layouts/MarkdownLayout.astro';
+import SideNotesLayout from '../../layouts/SideNotesLayout.astro';
 
 export async function getStaticPaths() {
   // This function creates a static route per md file in /notes during build time
@@ -13,6 +13,6 @@ export async function getStaticPaths() {
 const { note } = Astro.props;
 const { Content } = await render(note);
 ---
-<MarkdownLayout frontmatter={note.data}>
+<SideNotesLayout frontmatter={note.data}>
   <Content />
-</MarkdownLayout>
+</SideNotesLayout>

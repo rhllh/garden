@@ -1,0 +1,45 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Tags from '../components/Tags.astro';
+
+const { frontmatter } = Astro.props;
+---
+<BaseLayout pageTitle={frontmatter.title}>
+  <div class="note-layout">
+    <main class="note-content">
+      <h2>{frontmatter.title}</h2>
+      <Tags tags={frontmatter.tags} />
+      <slot />
+    </main>
+
+    <aside class="side-notes" aria-label="Side notes">
+    </aside>
+  </div>
+</BaseLayout>
+
+<script>
+  const noteLayout = document.querySelector('.note-layout');
+  const noteContent = document.querySelector('.note-content');
+  const noteTexts = [...document.querySelectorAll<HTMLElement>('.inline-side-note__text')];
+
+  function positionSideNotes() {
+    if (!noteLayout || !noteContent || window.innerWidth <= 800) return;
+
+    const layoutTop = noteLayout.getBoundingClientRect().top;
+    let previousBottom = 0;
+
+    noteTexts.forEach((noteText) => {
+      const anchor = noteText.parentElement as HTMLElement | null;
+      if (!anchor) return;
+
+      const anchorTop = anchor.getBoundingClientRect().top - layoutTop;
+      const top = Math.max(anchorTop, previousBottom + 24);
+
+      noteText.style.top = `${top}px`;
+      previousBottom = top + noteText.offsetHeight;
+    });
+  }
+
+  positionSideNotes();
+  window.addEventListener('resize', positionSideNotes);
+</script>
