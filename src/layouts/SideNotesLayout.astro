@@ -41,5 +41,6 @@ const { frontmatter } = Astro.props;
   }
 
   positionSideNotes();
+  window.addEventListener('load', positionSideNotes);
   window.addEventListener('resize', positionSideNotes);
 </script>
